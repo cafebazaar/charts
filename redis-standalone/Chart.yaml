@@ -11,8 +11,6 @@ keywords:
   - prototyping
   - note
   - include
-  - high
-  - availability
 source: 
-  - https://github.com/kubernetes/charts/tree/master/redis-standalone
-home: http://github.com/deis/helm
+  - https://github.com/colonelmo/charts/tree/master/redis-standalone
+home: http://github.com/kubernetes/helm
