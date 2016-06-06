@@ -1,0 +1,9 @@
+name: talkative
+description: Talkative web service
+version: 0.0.1
+keywords:
+- talkative
+- http
+source: 
+  - https://github.com/colonelmo/charts/tree/master/talkative
+home: http://github.com/kubernetes/helm

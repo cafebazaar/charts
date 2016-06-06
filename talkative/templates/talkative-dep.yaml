@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: talkative-deployment
+spec:
+  replicas: {{.Replicas}}
+  template:
+    metadata:
+      labels:
+        name: {{.Release.Name}}-talkative
+        mode: standalone
+        provider: {{.Release.Name}}-talkative
+        app: talkative
+    spec:
+      containers:
+        - name: {{.Release.Name}}-talkative
+        image: quay.io/colonelmo/talkative:{{.TalkVersion}}
+        ports:
+        - containerPort: {{.Port}}
+
