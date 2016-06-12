@@ -13,8 +13,7 @@ spec:
         app: talkative
     spec:
       containers:
-        - name: {{.Release.Name}}-talkative
-        image: quay.io/colonelmo/talkative:{{.TalkVersion}}
+      - name: {{.Release.Name}}-talkative
+        image: quay.io/colonelmo/talkative:0.1
         ports:
         - containerPort: {{.Port}}
-
