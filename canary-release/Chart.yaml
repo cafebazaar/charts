@@ -1,0 +1,9 @@
+name: canary-release
+description: Canary Release on Kubernetes
+version: 0.0.1
+keywords:
+  - canary
+  - test
+source: 
+  - https://github.com/colonelmo/charts/tree/master/canary-release
+home: http://github.com/kubernetes/helm
