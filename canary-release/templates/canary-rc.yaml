@@ -18,10 +18,10 @@ spec:
         - containerPort: 80
         env:
         - name: SERVER_A
-          value: {{.ServiceOne}}
+          value: "{{.ServiceOne}}"
         - name: SERVER_B
-          value: {{.ServiceTwo}}
+          value: "{{.ServiceTwo}}"
         - name: SERVER_A_WEIGHT
-          value: {{.ServiceOneWeight}}
+          value: "{{.ServiceOneWeight}}"
       imagePullSecrets:
         - name: meta-secret  

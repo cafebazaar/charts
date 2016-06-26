@@ -11,6 +11,6 @@ metadata:
     "helm.sh/created": "{{.Release.Time.Seconds}}"
 spec:
   ports:
-  - port: {{.Port}}
+  - port: 80
   selector:
     provider: {{.Release.Name}}-canary
