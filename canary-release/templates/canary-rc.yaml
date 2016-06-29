@@ -24,4 +24,4 @@ spec:
         - name: SERVER_A_WEIGHT
           value: "{{.ServiceOneWeight}}"
       imagePullSecrets:
-        - name: meta-secret  
+        - name: registrykey 
