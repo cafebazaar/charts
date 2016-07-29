@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: {{.Release.Name}}-flower
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: {{.Release.Name}}-flower
+        provider: {{.Release.Name}}-flower
+        app: flower-Release
+    spec:
+      containers:
+      - name: {{.Release.Name}}-flower
+        image: quay.io/cafebazaar/flower:0.1
+        ports:
+        - containerPort: 5555
+        env:
+        - name: ENV1
+          value: "{{.Values.ENV1}}"
+        - name: ENV2
+          value: "{{.Values.ENV2}}"
+      imagePullSecrets:
+        - name: registrykey
