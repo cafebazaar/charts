@@ -1,0 +1,8 @@
+name: flower
+from:
+  name: flower
+  version: 0.0.1
+  repo: https://github.com/cafebazaar/charts.git
+home: http://github.com/kubernetes/helm
+version: 0.0.1
+description: Real-time monitor and web admin for Celery distributed task queue
