@@ -1,0 +1,9 @@
+name: logging
+version: 1.0
+description: |
+  Kuneretes logging addon with ELK.
+icon: icon.png
+from:
+  name: logging
+  version: 1.0
+  repo: https://github.com/cafebazaar/charts.git

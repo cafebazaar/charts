@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Service
+metadata:
+  name: logging-elasticsearch
+  labels:
+    component: elasticsearch
+spec:
+  selector:
+    name: elasticsearch
+  ports:
+  - name: http
+    port: 9200
+    targetPort: 9200
+  - name: https
+    port: 9300
+    targetPort: 9300
