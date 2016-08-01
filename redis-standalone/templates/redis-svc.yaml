@@ -4,7 +4,7 @@ metadata:
   name: {{.Release.Name}}-redis-sa
   labels:
     heritage: helm
-    chartName: {{.Chart.Name}}
+    chartName: {{.Chart.Name | quote}}
     chartVersion: {{.Chart.Version | quote}}
     provider: {{.Release.Name}}-redis-sa
   annotations:

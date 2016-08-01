@@ -4,13 +4,13 @@ metadata:
     name: {{.Release.Name}}-talkative
     labels:
       heritage: helm
-      chartName: {{.Chart.Name}}
+      chartName: {{.Chart.Name | quote}}
       chartVersion: {{.Chart.Version | quote}}
       provider: {{.Release.Name}}-talkative
     annotations:
       "helm.sh/created": "{{.Release.Time.Seconds}}"
 spec:
   ports:
-  - port: {{.Port}}
+  - port: "{{.Values.Port}}"
   selector:
     provider: {{.Release.Name}}-talkative
