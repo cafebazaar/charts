@@ -1,2 +1,2 @@
-ENV1: "ENV1"
-ENV2: "ENV2"
+BROKER_ADDR: "127.0.0.1"
+
