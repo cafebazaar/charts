@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: talkative-deployment
 spec:
-  replicas: {{.Replicas}}
+  replicas: "{{.Values.Replicas}}"
   template:
     metadata:
       labels:
@@ -16,4 +16,4 @@ spec:
       - name: {{.Release.Name}}-talkative
         image: quay.io/colonelmo/talkative:0.1
         ports:
-        - containerPort: {{.Port}}
+        - containerPort: "{{.Values.Port}}"

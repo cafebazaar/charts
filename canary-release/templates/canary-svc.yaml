@@ -4,7 +4,7 @@ metadata:
   name: {{.Release.Name}}-canary
   labels:
     heritage: helm
-    chartName: {{.Chart.Name}}
+    chartName: {{.Chart.Name | quote}}
     chartVersion: {{.Chart.Version | quote}}
     provider: {{.Release.Name}}-canary
   annotations:

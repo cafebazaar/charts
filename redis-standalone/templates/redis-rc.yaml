@@ -4,13 +4,13 @@ metadata:
   name: {{.Release.Name}}-redis-sa
   labels:
     heritage: helm
-    chartName: {{.Chart.Name}}
+    chartName: {{.Chart.Name | quote}}
     chartVersion: {{.Chart.Version | quote}}
     provider: {{.Release.Name}}-redis-sa
   annotations:
     "helm.sh/created": "{{.Release.Time.Seconds}}"
 spec:
-  replicas: {{.Replicas}}
+  replicas: "{{.Values.Replicas}}"
   selector:
     name: {{.Release.Name}}-redis-sa
     mode: standalone
