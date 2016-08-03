@@ -8,7 +8,6 @@ spec:
     metadata:
       labels:
         app: {{.Release.Name | quote}}
-        name: {{.Release.Name | quote}}
     spec:
       containers:
       - name: {{.Release.Name | quote}}
