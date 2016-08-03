@@ -13,4 +13,4 @@ spec:
   ports:
   - port: 5555
   selector:
-    provider: {{.Release.Name}}
+    provider: {{.Release.Name | quote}}
