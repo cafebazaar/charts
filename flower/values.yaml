@@ -1,2 +1,1 @@
-BROKER_ADDR: "127.0.0.1"
-
+BROKER_ADDR: "redis://127.0.0.1:6379"
