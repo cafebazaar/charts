@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: {{.Release.Name | quote}}
-        image: quay.io/cafebazaar/flower:latest
+        image: quay.io/cafebazaar/flower:0.2
         ports:
         - containerPort: 5555
         env:
