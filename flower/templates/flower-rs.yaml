@@ -8,15 +8,12 @@ spec:
     metadata:
       labels:
         app: {{.Release.Name | quote}}
-        name: {{.Release.Name | quote}}
     spec:
       containers:
       - name: {{.Release.Name | quote}}
-        image: quay.io/cafebazaar/flower:0.1
+        image: quay.io/cafebazaar/flower:0.2
         ports:
         - containerPort: 5555
         env:
-        - name: ENV1
-          value: "{{.Values.ENV1}}"
-        - name: ENV2
-          value: "{{.Values.ENV2}}"
+        - name: BROKER_ADDR
+          value: "{{.Values.BROKER_ADDR}}"
