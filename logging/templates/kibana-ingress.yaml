@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: logging-kibana
+spec:
+  rules:
+  - host: logging-kibana.master.cafecluster
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: logging-kibana
+          servicePort: 5601
