@@ -25,7 +25,7 @@ spec:
           - name: INFLUXDB_SERVICE_URL
             value: http://monitoring-influxdb:8086
           - name: GF_SERVER_ROOT_URL
-            value: /api/v1/proxy/namespaces/kube-system/services/monitoring-grafana/
+            value: /api/v1/proxy/namespaces/{{ .Release.Namespace }}/services/monitoring-grafana/
         volumeMounts:
         - mountPath: /var/lib/grafana
           name: grafana-storage
