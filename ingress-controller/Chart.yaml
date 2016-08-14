@@ -1,0 +1,8 @@
+name: ingress-controller
+version: 1.0
+description: |
+  Kuneretes ingress controller.
+from:
+  name: ingress-controller
+  version: 1.0
+  repo: https://github.com/cafebazaar/charts.git
