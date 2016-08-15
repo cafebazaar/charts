@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{.Release.Name | quote}}
+  labels:
+    heritage: "helm"
+    chartName: {{.Chart.Name | quote}}
+    chartVersion: {{.Chart.Version | quote}}
+    provider: {{.Release.Name | quote}}
+spec:
+  ports:
+  - port: 9090
+  selector:
+    app: {{.Release.Name | quote}}
+
