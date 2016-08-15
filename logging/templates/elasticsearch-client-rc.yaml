@@ -24,7 +24,7 @@ spec:
           capabilities:
             add:
               - IPC_LOCK
-        image: quay.io/cafebazaar/elasticsearch-cluster-kubernetes:2.3.1
+        image: quay.io/cafebazaar/elasticsearch-cluster-kubernetes
         imagePullPolicy: Always
         env:
         - name: NAMESPACE
@@ -39,6 +39,8 @@ spec:
           value: "false"
         - name: HTTP_ENABLE
           value: "true"
+        - name: HTTP_CORS_ALLOW_ORIGIN
+          value: "*"
         - name: DISCOVERY_SERVICE
           value: es-logging-discovery
         ports:
