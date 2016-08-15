@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: {{.Release.Name | quote}}
+  labels:
+    app: {{.Release.Name | quote}}
+spec:
+  template:
+    metadata:
+      labels:
+        app: {{.Release.Name | quote}}
+    spec:
+      containers:
+        - image: quay.io/ebraminio/pad.js:0.2
+          name: {{.Release.Name | quote}}
+          volumeMounts:
+            - name: padjs-files
+              mountPath: "/files"
+          ports:
+          - containerPort: 9090
+            hostPort: 9090
+            name: padjs-port
+      volumes:
+        - name: padjs-files
+          hostPath: 
+            path: "/var/cafecluster/hostpaths/padjs"
+      nodeSelector:
+        kubernetes.io/hostname: {{.Values.NODE_NAME | quote}}

@@ -1,0 +1,9 @@
+name: padjs
+from:
+  name: padjs
+  version: 0.0.1
+  repo: https://github.com/cafebazaar/charts.git
+home: http://github.com/kubernetes/helm
+version: 0.0.1
+description: Total fancy webserver for transfering files from/to browser console or terminal
+
