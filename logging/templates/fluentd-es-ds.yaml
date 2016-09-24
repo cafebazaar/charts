@@ -22,7 +22,7 @@ spec:
             memory: 200Mi
         volumeMounts:
         - name: config
-          mountPath: /etc/td-agent/td-agent.conf
+          mountPath: /etc/td-agent
         - name: varlog
           mountPath: /var/log
         - name: varlibdockercontainers
