@@ -131,6 +131,7 @@ data:
       format nginx
       tag nginx.access
       path /var/log/nginx/access.log
+      pos_file /var/log/nginx/access.log.pos
     </source>
 
     # 2009/01/01 19:45:44 [error]  29874#0: *98 open() "/var/www/one/nonexistent.html" failed (2: No such file or directory), client: 11.22.33.44, server: one.org, request: "GET /nonexistent.html HTTP/1.1", host: "one.org"
@@ -138,6 +139,7 @@ data:
       type tail
       tag nginx.error
       path /var/log/nginx/error.log
+      pos_file /var/log/nginx/error.log.pos
 
       format multiline
       format /^(?<time>\d{4}/\d{2}/\d{2} \d{2}:\d{2}:\d{2}) \[(?<log_level>\w+)\] (?<pid>\d+).(?<tid>\d+): (?<message>.*)/
