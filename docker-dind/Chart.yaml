@@ -1,0 +1,8 @@
+name: docker-dind
+from:
+  name: docker-dind
+  version: 0.0.1
+  repo: https://github.com/cafebazaar/charts.git
+home: http://github.com/kubernetes/helm
+version: 0.0.1
+description: Docker dind service

@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: {{.Release.Name}}
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: {{.Release.Name}}
+    spec:
+      containers:
+      - name: {{.Release.Name}}
+        image: docker:dind
+        ports:
+        - containerPort: 2375
+        env:
+        - name: NO_PROXY
+          value: "localhost,127.0.0.1"
+        - name: HTTP_PROXY
+          value: "{{.Values.HttpProxy}}"
