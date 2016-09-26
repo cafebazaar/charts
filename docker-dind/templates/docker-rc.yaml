@@ -19,3 +19,5 @@ spec:
           value: "localhost,127.0.0.1"
         - name: HTTP_PROXY
           value: "{{.Values.HttpProxy}}"
+        securityContext:
+          privileged: true
