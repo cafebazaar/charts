@@ -9,6 +9,10 @@ data:
       type null
     </match>
 
+    <match kubernetes.**.fluent**>
+      type null
+    </match>
+
     # {"log":"[info:2016-02-16T16:04:05.930-08:00] Some log text here\n","stream":"stdout","time":"2016-02-17T00:04:05.931087621Z"}
     <source>
       type tail
