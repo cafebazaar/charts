@@ -1,18 +1,18 @@
 apiVersion: v1
 kind: ReplicationController 
 metadata:
-  name: {{.Release.Name}}-canary
+  name: {{.Release.Name}}
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        name: {{.Release.Name}}-canary
-        provider: {{.Release.Name}}-canary
-        app: canary-Release
+        name: {{.Release.Name}}
+        provider: {{.Release.Name}}
+        app: canary-release
     spec:
       containers:
-      - name: {{.Release.Name}}-canary
+      - name: {{.Release.Name}}
         image: meta.cafebazaar.ir:5000/givia/canary-release
         ports:
         - containerPort: 80
