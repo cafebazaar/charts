@@ -12,9 +12,9 @@ metadata:
 spec:
   replicas: "{{.Values.Replicas}}"
   selector:
-    name: {{.Release.Name}}-redis-sa
+    name: {{.Release.Name}}
     mode: standalone
-    provider: {{.Release.Name}}-redis-sa
+    provider: {{.Release.Name}}
   template:
     metadata:
       labels:
