@@ -13,15 +13,17 @@ spec:
     spec:
       containers:
       - name: {{.Release.Name}}
-        image: meta.cafebazaar.ir:5000/givia/canary-release
+        image: quay.io/cafebazaar/canary:latest
         ports:
         - containerPort: 80
         env:
-        - name: SERVER_A
+        - name: SERVICE_ONE
           value: "{{.Values.ServiceOne}}"
-        - name: SERVER_B
+        - name: SERVICE_TWO
           value: "{{.Values.ServiceTwo}}"
-        - name: SERVER_A_WEIGHT
+        - name: SERVICE_ONE_WEIGHT
           value: "{{.Values.ServiceOneWeight}}"
+        - name: SERVICE_TWO_WEIGHT
+          value: "{{.Values.ServiceTwoWeight}}"
       imagePullSecrets:
         - name: registrykey 

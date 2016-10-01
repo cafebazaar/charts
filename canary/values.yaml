@@ -1,3 +1,4 @@
 ServiceOne: "c-talkative.ali-javadi.svc.cafecluster"
 ServiceTwo: "d-talkative.ali-javadi.svc.cafecluster"
 ServiceOneWeight: "2"
+ServiceTwoWeight: "1"
