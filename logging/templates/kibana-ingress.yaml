@@ -2,6 +2,10 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: logging-kibana
+    annotations:
+      ingress.kubernetes.io/auth-type: basic
+      ingress.kubernetes.io/auth-secret: basic-auth
+      ingress.kubernetes.io/auth-realm: "Authentication Required - monitoring"
 spec:
   rules:
   - host: logging-kibana.master.cafecluster
