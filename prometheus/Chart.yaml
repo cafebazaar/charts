@@ -1,0 +1,8 @@
+name: prometheus
+version: 1.0
+description: |
+  Kuneretes logging addon with prometheus.
+from:
+  name: prometheus
+  version: 1.0
+  repo: https://github.com/cafebazaar/charts.git
