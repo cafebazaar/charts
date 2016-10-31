@@ -6,7 +6,7 @@ metadata:
     app: prometheus
     component: core
 data:
-  prometheus.yml: |-
+  prometheus.yml: |
     global:
       scrape_interval: 15s
       scrape_timeout: 15s
@@ -19,7 +19,7 @@ data:
 
     - job_name: 'kubernetes-cluster'
       kubernetes_sd_configs:
-        api_servers:
+      - api_servers:
         - {{.Values.KubeAddr}}
         in_cluster: true
         role: apiserver
@@ -42,8 +42,8 @@ data:
 
     - job_name: 'kubernetes-endpoints'
       kubernetes_sd_configs:
-        - api_servers:
-          - {{.Values.KubeAddr}}
+      - api_servers:
+        - {{.Values.KubeAddr}}
         in_cluster: true
         role: endpoint
       relabel_configs:

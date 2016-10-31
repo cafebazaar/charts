@@ -17,10 +17,10 @@ spec:
       - name: grafana
         image: grafana/grafana:3.1.1-1470047149
         env:
-          - name: GF_SERVER_ROOT_URL
-            value: {{.Values.GrafanaURL}}
-          - name: GF_AUTH_ANONYMOUS_ENABLED
-            value: "false"
+        - name: GF_SERVER_ROOT_URL
+          value: {{.Values.GrafanaURL}}
+        - name: GF_AUTH_ANONYMOUS_ENABLED
+          value: "false"
         volumeMounts:
         - mountPath: /var/lib/grafana
           name: grafana-storage

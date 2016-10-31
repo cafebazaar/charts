@@ -22,9 +22,9 @@ spec:
       - name: prometheus
         image: prom/prometheus:v1.2.2
         args:
-          - '-storage.local.retention=72h'
-          - '-storage.local.memory-chunks=500000'
-          - '-config.file=/etc/prometheus/prometheus.yml'
+        - '-storage.local.retention=72h'
+        - '-storage.local.memory-chunks=500000'
+        - '-config.file=/etc/prometheus/prometheus.yml'
         ports:
         - name: web
           containerPort: 9090
