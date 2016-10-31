@@ -1,23 +1,28 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
+  lables:
+    app: prometheus
+    component: core
   name: prometheus
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: prometheus
+      component: core
   template:
     metadata:
       name: prometheus
       labels:
         app: prometheus
+        component: core
     spec:
       containers:
       - name: prometheus
-        image: quay.io/coreos/prometheus:0.19.2
+        image: prom/prometheus:v1.2.2
         args:
-          - '-storage.local.retention=6h'
+          - '-storage.local.retention=72h'
           - '-storage.local.memory-chunks=500000'
           - '-config.file=/etc/prometheus/prometheus.yml'
         ports:

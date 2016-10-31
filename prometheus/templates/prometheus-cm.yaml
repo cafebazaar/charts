@@ -2,55 +2,126 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: prometheus
+  labels:
+    app: prometheus
+    component: core
 data:
   prometheus.yml: |-
     global:
       scrape_interval: 15s
+      scrape_timeout: 15s
+      evaluation_interval: 15s
     scrape_configs:
-    # etcd is living outside of our cluster and we configure
-    # it directly.
     - job_name: 'etcd'
       target_groups:
       - targets:
         - {{.Values.EtcdAddr}}
-    - job_name: 'kubernetes_components'
+
+    - job_name: 'kubernetes-cluster'
       kubernetes_sd_configs:
-      - api_servers:
+        api_servers:
         - {{.Values.KubeAddr}}
         in_cluster: true
-        # This configures Prometheus to identify itself when scraping
-        # metrics from Kubernetes cluster components.
+        role: apiserver
       tls_config:
         ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
       bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
-      # Prometheus provides meta labels for each monitoring targets. We use
-      # these to select targets we want to monitor and to modify labels attached
-      # to scraped metrics.
-      relabel_configs:
-      # Only scrape apiserver and kubelets.
-      - source_labels: [__meta_kubernetes_role]
-        action: keep
-        regex: (?:apiserver|node)
-      # Redefine the Prometheus job based on the monitored Kuberentes component.
-      - source_labels: [__meta_kubernetes_role]
-        target_label: job
-        replacement: kubernetes_$1
-      # Attach all node labels to the metrics scraped from the components running
-      # on that node.
-      - action: labelmap
-        regex: __meta_kubernetes_node_label_(.+)
-    - job_name: 'kubernetes_services'
+
+    - job_name: 'kubernetes-nodes'
       kubernetes_sd_configs:
       - api_servers:
         - {{.Values.KubeAddr}}
         in_cluster: true
+        role: node
+      tls_config:
+        ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+      bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
       relabel_configs:
-      - source_labels: [__meta_kubernetes_role, __meta_kubernetes_service_annotation_prometheus_io_scrape]
+      - action: labelmap
+        regex: __meta_kubernetes_node_label_(.+)
+
+    - job_name: 'kubernetes-endpoints'
+      kubernetes_sd_configs:
+        - api_servers:
+          - {{.Values.KubeAddr}}
+        in_cluster: true
+        role: endpoint
+      relabel_configs:
+      - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scrape]
         action: keep
-        regex: endpoint;true
-      - source_labels: [__meta_kubernetes_service_name]
-        target_label: job
-      - source_labels: [__meta_kubernetes_namespace]
-        target_label: namespace
+        regex: true
+      - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scheme]
+        action: replace
+        target_label: __scheme__
+        regex: (https?)
+      - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_path]
+        action: replace
+        target_label: __metrics_path__
+        regex: (.+)
+      - source_labels: [__address__, __meta_kubernetes_service_annotation_prometheus_io_port]
+        action: replace
+        target_label: __address__
+        regex: (.+)(?::\d+);(\d+)
+        replacement: $1:$2
       - action: labelmap
         regex: __meta_kubernetes_service_label_(.+)
+      - source_labels: [__meta_kubernetes_service_namespace]
+        action: replace
+        target_label: kubernetes_namespace
+      - source_labels: [__meta_kubernetes_service_name]
+        action: replace
+        target_label: kubernetes_name
+
+    - job_name: 'kubernetes-services'
+      kubernetes_sd_configs:
+      - api_servers:
+        - {{.Values.KubeAddr}}
+        in_cluster: true
+        role: service
+      metrics_path: /probe
+      params:
+        module: [http_2xx]
+      relabel_configs:
+      - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_probe]
+        action: keep
+        regex: true
+      - source_labels: [__address__]
+        target_label: __param_target
+      - target_label: __address__
+        replacement: blackbox
+      - source_labels: [__param_target]
+        target_label: instance
+      - action: labelmap
+        regex: __meta_kubernetes_service_label_(.+)
+      - source_labels: [__meta_kubernetes_service_namespace]
+        target_label: kubernetes_namespace
+      - source_labels: [__meta_kubernetes_service_name]
+        target_label: kubernetes_name
+
+    - job_name: 'kubernetes-pods'
+      kubernetes_sd_configs:
+      - api_servers:
+        - {{.Values.KubeAddr}}
+        in_cluster: true
+        role: pod
+      relabel_configs:
+      - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+        action: keep
+        regex: true
+      - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]
+        action: replace
+        target_label: __metrics_path__
+        regex: (.+)
+      - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
+        action: replace
+        regex: (.+):(?:\d+);(\d+)
+        replacement: ${1}:${2}
+        target_label: __address__
+      - action: labelmap
+        regex: __meta_kubernetes_pod_label_(.+)
+      - source_labels: [__meta_kubernetes_pod_namespace]
+        action: replace
+        target_label: kubernetes_namespace
+      - source_labels: [__meta_kubernetes_pod_name]
+        action: replace
+        target_label: kubernetes_pod_name
