@@ -15,12 +15,12 @@ data:
     - job_name: 'etcd'
       target_groups:
       - targets:
-        - {{.Values.EtcdAddr}}
+        - "{{.Values.EtcdAddr}}"
 
     - job_name: 'kubernetes-cluster'
       kubernetes_sd_configs:
       - api_servers:
-        - {{.Values.KubeAddr}}
+        - "{{.Values.KubeAddr}}"
         in_cluster: true
         role: apiserver
       tls_config:
@@ -30,7 +30,7 @@ data:
     - job_name: 'kubernetes-nodes'
       kubernetes_sd_configs:
       - api_servers:
-        - {{.Values.KubeAddr}}
+        - "{{.Values.KubeAddr}}"
         in_cluster: true
         role: node
       tls_config:
@@ -43,7 +43,7 @@ data:
     - job_name: 'kubernetes-endpoints'
       kubernetes_sd_configs:
       - api_servers:
-        - {{.Values.KubeAddr}}
+        - "{{.Values.KubeAddr}}"
         in_cluster: true
         role: endpoint
       relabel_configs:
@@ -75,7 +75,7 @@ data:
     - job_name: 'kubernetes-services'
       kubernetes_sd_configs:
       - api_servers:
-        - {{.Values.KubeAddr}}
+        - "{{.Values.KubeAddr}}"
         in_cluster: true
         role: service
       metrics_path: /probe
@@ -101,7 +101,7 @@ data:
     - job_name: 'kubernetes-pods'
       kubernetes_sd_configs:
       - api_servers:
-        - {{.Values.KubeAddr}}
+        - "{{.Values.KubeAddr}}"
         in_cluster: true
         role: pod
       relabel_configs:
