@@ -13,7 +13,7 @@ data:
       evaluation_interval: 15s
     scrape_configs:
     - job_name: 'etcd'
-      target_groups:
+      static_configs:
       - targets:
         - "{{.Values.EtcdAddr}}"
 
