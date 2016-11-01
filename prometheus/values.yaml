@@ -1,3 +1,3 @@
 KubeAddr: ""
-EtcdAddr: ""
-GrafanaURL: "/grafana"
+PrometheusURL: ""
+GrafanaURL: ""
