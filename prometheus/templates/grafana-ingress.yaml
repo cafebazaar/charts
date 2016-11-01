@@ -1,17 +1,13 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: prometheus
+  name: grafana
 spec:
   rules:
-  - host: prometheus.roo.cloud
+  - host: {{.Values.GrafanaURL}}
     http:
       paths:
       - path: /
-        backend:
-          serviceName: prometheus
-          servicePort: 9090
-      - path: /grafana
         backend:
           serviceName: prometheus-grafana
           servicePort: 80
