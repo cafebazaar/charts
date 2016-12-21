@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  lables:
+  labels:
     app: prometheus
     component: core
   name: prometheus
